@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve a Room</title>
+    <!-- <link href="{{	url_for('static',	filename='customer_stylesheet.css')	}}" rel="stylesheet" /> !-->
+</head>
+<body>
+    <form action="{{url_for('addbookingrecord')}}" method = "POST">
+        <h1>Reserve a Room</h1>
+        Name<br>
+        <input type="text" name="name"/><br>
+        Check-in Date<br>
+        <input type="date" name="checkin"/><br>
+        Check-out Date<br>
+        <input type="date" name="checkout"/><br>
+        Room Type<br>
+        <input type="text" name="roomtype"/><br>
+
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>

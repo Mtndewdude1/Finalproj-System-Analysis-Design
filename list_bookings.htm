@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showing all Reservations</title>
+    <!-- <link href="{{	url_for('static',	filename='customer_stylesheet.css')	}}" rel="stylesheet" /> !-->
+</head>
+<body>
+    <table>
+
+    <tr>
+        <th>Name</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Room Type</th>
+    </tr>
+    
+    {%  for row in rows  %}
+    <tr>
+        <td>{{row["name"]}}</td>
+        <td>{{row["checkin"]}}</td>
+        <td>{{row["checkout"]}}</td>
+        <td>{{row["roomtype"]}} </td>
+    </tr>
+    
+    {%  endfor  %}
+    </table>
+
+    <br>
+    <a href='/'><button>Return to Home</button></a>
+
+</body>
+</html>
