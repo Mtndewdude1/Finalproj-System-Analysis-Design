@@ -6,12 +6,12 @@ app = Flask(__name__)
 def welcome():
 	return render_template('welcome.htm')
 
-@app.route('/bookaroom')
-def bookaroom():
+@app.route('/roombooking')
+def roombooking():
 	return render_template('booking.htm')
 
-@app.route("/addbookingrecord", methods = ["POST", "GET"])
-def addbookingrecord():
+@app.route("/suitebooking", methods = ["POST", "GET"])
+def suitebooking():
     if request.method == "POST":
         name = request.form["name"]
         checkin = request.form["checkin"]
@@ -20,21 +20,19 @@ def addbookingrecord():
 
         cmd = "INSERT INTO hotel (name, checkin, checkout, roomtype) VALUES ('{0}', '{1}', '{2}', '{3}')".format(name, checkin, checkout, roomtype)
 
-        with sql.connect("database.db") as conn:
+        with sql.connect("hotel.db") as conn:
             cur = conn.cursor()
             cur.execute(cmd)
             conn.commit()
-            # msg = "Customer data successfully saved."
-            return render_template("confirmed.htm", name=name, checkin=checkin, checkout=checkout) #, msg = msg
+            return render_template("confirmation.htm", name=name, checkin=checkin, checkout=checkout)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         user = request.form['username']
         pswd = request.form['password']
-        if user == 'manager' and pswd == 'hotelManager18':
-#            return render_template('list_bookings.htm', name=user)
-                conn = sql.connect("database.db")
+        if user == 'Manager' and pswd == 'Panther$hotel':
+                conn = sql.connect("hotel.db")
                 conn.row_factory = sql.Row
 
                 cmd = "SELECT * FROM hotel"
@@ -42,9 +40,9 @@ def login():
                 cur.execute(cmd)
                 rows = cur.fetchall()
                 conn.close()
-                return render_template("list_bookings.htm", rows = rows)
+                return render_template("listRooms.htm", rows = rows)
         else:
-            return render_template('rejected_login.htm', name=user)
+            return render_template('manageronly.htm', name=user)
     else:
         return render_template('login.htm')
 
